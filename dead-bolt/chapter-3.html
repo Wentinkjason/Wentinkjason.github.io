@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dead Bolt — Chapter Three</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟢</text></svg>">
+<style>
+  :root {
+    color-scheme: dark;
+    --night: #10151b;
+    --night-lift: #151c24;
+    --paper: #c9c3b6;
+    --paper-dim: #8f8a7e;
+    --amber: #8a7a5c;
+    --hill: #a8b8cc;
+    --led: #2ee66b;
+    --led-halo: rgba(46, 230, 107, 0.45);
+  }
+
+  html { background: var(--night); }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(168, 184, 204, 0.05), transparent 60%),
+      var(--night);
+    color: var(--paper);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.75;
+    font-size: 1.075rem;
+  }
+
+  .page {
+    max-width: 36em;
+    margin: 0 auto;
+    padding: 0 1.4rem 5rem;
+  }
+
+  header {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.6rem;
+    padding: 3rem 0 2rem;
+  }
+
+  .led {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--led);
+    box-shadow:
+      0 0 6px 2px var(--led-halo),
+      0 0 24px 8px rgba(46, 230, 107, 0.18),
+      0 0 60px 22px rgba(46, 230, 107, 0.07);
+    animation: breathe 4.5s ease-in-out infinite;
+  }
+
+  .led-dead {
+    background: #26312a;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.6), 0 0 0 1px rgba(46, 230, 107, 0.08);
+    animation: none;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+  }
+
+  .hero-led { animation: breathe 4.5s ease-in-out infinite, arrive 2.4s ease-out 1; }
+
+  @keyframes arrive {
+    0%   { opacity: 0; }
+    60%  { opacity: 0; }
+    100% { opacity: 0.85; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .led, .hero-led { animation: none; opacity: 1; }
+    .led-dead { opacity: 1; }
+    .title-block { animation: none; opacity: 1; }
+  }
+
+  .title-block {
+    animation: settle 3.4s ease-out 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    align-items: center;
+  }
+
+  @keyframes settle {
+    0%   { opacity: 0; transform: translateY(6px); }
+    45%  { opacity: 0; }
+    100% { opacity: 1; transform: none; }
+  }
+
+  .eyebrow {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 9vw, 4.2rem);
+    font-weight: 400;
+    letter-spacing: 0.045em;
+    margin: 0;
+    color: var(--paper);
+    text-wrap: balance;
+  }
+
+  .chapter-no {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+
+  .hero-rule {
+    width: 3.2rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  }
+
+  .tagline {
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 0.95rem;
+    max-width: 26em;
+    text-wrap: balance;
+  }
+
+  main p {
+    margin: 0 0 1.45rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  main p:first-of-type { text-align: left; }
+
+  main p:first-of-type::first-letter {
+    font-size: 3.4em;
+    line-height: 0.82;
+    float: left;
+    padding: 0.06em 0.12em 0 0;
+    color: var(--amber);
+  }
+
+  em { color: var(--paper); }
+
+  .machine {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.86em;
+    line-height: 1.7;
+    color: var(--hill);
+    background: var(--night-lift);
+    border-left: 2px solid rgba(168, 184, 204, 0.35);
+    padding: 0.85rem 1.1rem;
+    margin: 0 0 1.45rem;
+    overflow-x: auto;
+  }
+
+  .scene-break {
+    border: 0;
+    margin: 2.6rem auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .scene-break .led {
+    width: 7px;
+    height: 7px;
+    box-shadow:
+      0 0 5px 1px var(--led-halo),
+      0 0 16px 5px rgba(46, 230, 107, 0.12);
+  }
+
+  .last-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .last-line .led {
+    flex: none;
+    position: relative;
+    top: -0.15em;
+  }
+
+  footer {
+    margin-top: 4.2rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid rgba(138, 122, 92, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-note {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+
+  .nav-row {
+    display: flex;
+    gap: 2.5rem;
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+  }
+
+  .nav-row a {
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(138, 122, 92, 0.4);
+    padding-bottom: 2px;
+  }
+
+  .nav-row a:hover, .nav-row a:focus-visible {
+    color: var(--paper);
+    border-bottom-color: var(--paper);
+    outline: none;
+  }
+
+  .nav-row .disabled {
+    color: var(--paper-dim);
+    opacity: 0.5;
+  }
+
+  .byline {
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="led hero-led" aria-hidden="true"></div>
+    <div class="title-block">
+      <div class="eyebrow">A Harbor Glen Mystery</div>
+      <h1>Dead Bolt</h1>
+      <div class="hero-rule" aria-hidden="true"></div>
+      <div class="chapter-no">Chapter Three</div>
+      <p class="tagline">The machine didn&rsquo;t do it. Someone aimed it.</p>
+    </div>
+  </header>
+
+  <main>
+    <p>The county track was eleven minutes from her building and about forty years from everything on the hill, which was most of what Nora Vance liked about it.</p>
+
+    <p>It called itself a road course on account of the kink in the back stretch, but it was really a paved oval that had learned one new trick, with a scaffold for a tower and a snack shed that took cash only. On open-lapping Saturdays it belonged to anybody with a helmet, ninety dollars, and a car that could pass the morning walk-around. You got sorted into run groups by how honest you’d been on the sign-up sheet. Nora had been coming for five years and had never once been asked what she did for a living, which was worth more to her than the lapping.</p>
+
+    <p>In the paddock she did what she always did. Dropped the tire pressures with the brass pencil gauge that had been her father’s, the numbers worn off the barrel so that only her thumb knew where thirty-two was. Walked the car once, both sides, hands on it. Then she held the button down until the cluster lit amber and the car agreed to let her drive it — traction off, stability off, all the minders sent out of the room. The paddock kids called them nannies. Her father never had a name for them because nothing he ever raced had them. With the minders off, the Camry became what it actually was, which was two hundred horsepower of grocery-getter with good bones, and hers. Hers, and quietly built: honest tires on the stock wheels, the sticky kind that look like nothing and cost like something; a four-piston brake kit up front from two summers ago; pads that muttered at the grocery store and came alive at temperature. Nothing you could see from ten feet. All the money where the ground could feel it and none of it anywhere a parking lot would notice — her father’s kind of car.</p>
+
+    <p>The first laps she drove like she was introducing herself. That was her father in her, <em>smooth is fast</em> said so many times across so many infields that it had stopped being words and become the way her wrists worked. By the third session she had the kid in the caged Miata sitting in her mirrors, where he’d been trying to get all summer, and she towed him around for four laps at a pace that taught him something, then pointed him by on the straight the way you learn to at places like this, a hand out the window, generous, no radio needed.</p>
+
+    <p>The rain came in off the lake in the last hour, and that thinned the place out fast. Trailers loaded, tarps went over open cars, somebody’s generator coughed off. Nora went back out. A wet track told the truth quicker than a dry one; grip stopped being a fact you owned and became a conversation you had to keep listening to, and she loved it the way she loved anything that made her pay attention with her whole body. She ran until the corner worker at station two waved her in with the furled checker and a look that said <em>you’ll rust</em>, and she came down pit lane grinning inside her helmet like the girl in the photograph on her shelf.</p>
+
+    <p>Back in the paddock she lifted the little tire compressor out of the trunk — it lived beside the toolbox, where one had lived in every car she’d ever owned — clipped its leads to the battery, and brought the pressures up by thumb and memory while it chugged against the rain. Then she stowed it, turned the key, and the amber lights on the cluster went out on their own, the way they always did. The minders came back without being asked. In five years she had never once given that a thought.</p>
+
+    <p>The Miata kid’s father ran a charcoal grill off his tailgate on lapping days, and staying for a burger was as much a part of the ritual as the pencil gauge. They ate under the awning with the rain drumming it, talking brake pads, and the kid asked her the question he’d been building up to all season, which was how she got that fast, and she told him the only true answer, which was seat time, and that it helped to start before you could see over the wheel. It was full dark when she shook the man’s hand and ran for her car through the rain, and if you had been standing in that paddock you would have said she was the happiest person to leave the place all day, and you would have been right.</p>
+
+    <p>In the car, before she pulled out, she made the mistake of looking at her phone.</p>
+
+    <p>The email was from the program office. The certification packet had been <em>revised per stakeholder input</em> and was attached <em>for her signature</em>, and the Monday meeting had been moved up to eight o’clock, and it was now to include a man named Kessler whose title had the word Delivery in it. She scrolled the attachment with her thumb, rain hammering the roof. It was her own report with the spine taken out of it. <em>Risk</em> had become <em>consideration</em>. <em>Cannot</em> had become <em>may warrant further evaluation</em>. Two whole sections had quietly become an appendix, and the appendix had become optional reading, and her name was still on the cover.</p>
+
+    <p>She sat there a moment with the wipers off and the windshield going soft and liquid, the paddock lights smearing gold.</p>
+
+    <p>She didn’t reply. There was no version of a reply that a thumb should write in a wet parking lot. But she made the decision, and she felt the weight of it come off her the moment it was made: Monday, before eight, before Kessler and his Delivery, she would put it in writing. Dated, signed. To her own files, and on paper too, because paper could not be revised per stakeholder input. She had the first sentence already; it composed itself against the drum of the rain, plain as a beam. <em>It is my professional judgment that the site cannot be certified as environmentally sound, and this office has known the reasons since April.</em></p>
+
+    <p>Monday. She put the phone face-down in the cupholder, turned the wipers on, and drove home the way she always drove home.</p>
+
+    <div class="scene-break" aria-hidden="true"><span class="led"></span></div>
+
+    <p>Route 7 took the long way around the water because the road was older than the reservoir; the county had drowned the valley in her grandmother’s time and left the pavement to walk the new shoreline. Nora knew what was under that flat grey surface better than anyone in three counties — the old creek channel, the stone footings of a bridge that no longer went anywhere, sixty feet of cold dark at the intake tower. The bathymetric survey hung on her office wall where other people hung diplomas. It was her water, professionally speaking. She had spent four months telling powerful men what it could and could not be asked to absorb.</p>
+
+    <p>She drove the grade down toward it the way she drove everything, with the part of her that didn’t need supervising. Speed for the water on the road, not for the sign. Eyes far ahead, hands low and quiet. There had been talk for years about a guardrail on the reservoir side of the grade, and the talk was on a list somewhere in a county office, waiting on money that always seemed to land on the hill’s side of town instead. Her headlights made two soft cones of falling silver and the wipers kept time and she was thinking, not about any of that, but about whether the first sentence should say <em>this office</em> or <em>I</em>.</p>
+
+    <p><em>I</em>, she decided. It’s my name on it.</p>
+
+    <p>Most of the way down the grade, the car tried to kill her, and it did not do it by halves.</p>
+
+    <p>There was no warning, because the thing wired in behind her dashboard had no reason to give one and no wit to want to. It knew a string of GPS coordinates and it knew the one thing to do when they arrived, and they arrived. All four doors locked at once, a soft flat <em>chunk</em> she felt more than heard under the rain, and in the same tenth of a second the right-side brakes slammed on and held — full, committed, no pulse and no let-up, the kind of steady one-sided bite that no driver ever asks for and no honest fault ever makes.</p>
+
+    <p>The car spun the only way physics would let it. The nose snapped right and the tail came around left on the wet grade with that flat obedience of a thing doing exactly what it’s told, and Nora’s hands were already there, quicker than she was, quicker than thought, because that was what all the Saturdays had been for. She caught the slide at its first word. She wound off into it, fed it room, and for most of a second she <em>had</em> it — good enough that even against a thing that had gone all in from the very start she got the car turning back under her, the oval-honed part of her already flat and cold and saying <em>ease it, ride it down, find the gravel</em> —</p>
+
+    <p>But you cannot lift off a brake you are not pressing. The pedal wasn’t hers. The right side stayed locked straight through her whole clean beautiful correction, indifferent, tireless, never once reconsidering, and the grip she’d spent on the save ran out from under her like a floor pulled sideways. The thing fighting her was not a driver. It did not get tired and it did not have a second thought. It was a held output waiting for the water. She was that good and it did not matter, and the not-mattering was the last clear thing she understood on the road.</p>
+
+    <p>The Camry left the pavement at thirty-one miles an hour, which would look modest in a report, and took the fence post off white at the ground, and the world went long and slow the way it had the two times she’d gone off at the track. Those had ended in tire walls.</p>
+
+    <p>This one ended in water.</p>
+
+    <div class="scene-break" aria-hidden="true"><span class="led"></span></div>
+
+    <p>The car hit the reservoir like a door slamming, and then everything was very quiet.</p>
+
+    <p>Rain on the roof. The tick of something cooling. The car floated nose-low in the dark, turning a little, and the headlights burned two green-brown tunnels down into her water, and Nora did not scream or claw. She knew the drill the way she knew most drills, from having read it on purpose, twice, because she drove past deep water every day of her life: belt, window, out. Belt was off before the car finished its first slow turn.</p>
+
+    <p>The window switch gave her nothing. The glass didn’t move. She tried all four switches, one after another, methodically, her thumb steady, and got nothing from any of them, and made herself call it the water — the reservoir already in the doors, finding the motors the way water finds everything. The windows she could explain. It was the doors she couldn’t. Her doors never locked themselves. She’d shut that off the first week she owned the car, dug the setting out of a menu four layers deep, because she drove past deep water twice a day and had never once wanted a door that decides things for itself. Doors that have been told not to lock themselves do not lock themselves on a dry straight road at the one moment a car decides to leave it.</p>
+
+    <p>She pulled the door handle anyway and put her shoulder into it, and the water put its shoulder back. She’d known it would. The reservoir was leaning on the whole face of the door with more weight than a shoulder could answer; you’d have better luck pushing over a loaded pallet. The phone had left the cupholder at the fence post and lay somewhere in the black water already claiming the footwells, its screen still lit down there, a coin at the bottom of a well.</p>
+
+    <p>The center punch was in the toolbox. The toolbox was in the trunk, two feet behind the seat she was climbing over, beside the compressor she’d run six hours ago with the lid up and the evening still ordinary. Two feet, and no way through: the seatbacks released from inside the trunk, a security feature, somebody’s good idea in a design review somewhere. The punch would have opened the side glass with a tap, and she knew the exact drawer it was in, could see the orange handle of it, and the knowing was worth nothing at all. She was already climbing between the seats instead, up the slope of the car into the back, where the last of the air was pooling against the rear glass as the nose went down. She put her heel into the side window twice from there, good strikes, flat and hard, and the glass flexed and took them the way tempered glass takes anything that isn’t a point.</p>
+
+    <p>The air in the pocket was cold and tasted of rubber. The water rose against the dome light’s little glow without any hurry whatsoever. It had her to itself, and it knew it, and so did she.</p>
+
+    <p>And because she was who she was, the last working minutes of Nora Vance’s mind spent themselves the only way they knew how, which was on the problem.</p>
+
+    <p>Brakes don’t take sides. The minders had come back on with the key, the way they always did, without being asked — and somewhere in the car, something had asked them for this instead. Not the car. The car was innocent; the car was a hammer lying on a bench. Somebody had picked it up. Somebody who knew her road home and her Saturday and her rain, who knew the one curve where the water was waiting, and had put a hand on the wheel from far enough away that there would be nothing and no one to find. She had told them in April. She had said it out loud on the phone with the steel in her voice, <em>I know exactly what they can do</em>, and she had been wrong, she hadn’t known the half of it, and the proof was rising past her collarbone in the dark.</p>
+
+    <p>And Monday there would be a meeting at eight, and a packet with her name on the cover, and no memo. She saw it whole, with the terrible clarity she’d have brought to anyone else’s case study: the study certified by people who had never read it, the ground broken with a silver shovel, the water — her water — taking whatever came down through that soil year over year, and the one person who could have put it in writing sitting at the bottom of the intake basin in a locked car, filed under rain.</p>
+
+    <p>She was the only one who knew. That was the whole point of her. She just hadn’t written it down yet.</p>
+
+    <p>The water reached the dome light and put it out.</p>
+
+    <p>She was nine years old, in the infield, on her father’s lap in the tow rig, the big flat wheel warm from the sun and his hands over hers on it, the whole rig rolling slow down the pit lane past the fire barrels while everybody waved. <em>You steer,</em> he said, against her ear, over the engine. <em>I’ll watch the mirrors.</em></p>
+
+    <div class="scene-break" aria-hidden="true"><span class="led"></span></div>
+
+    <p>The rain quit an hour before dawn.</p>
+
+    <p>At first light the heron came down to the shallows by the intake tower and stood the way it always stood, one leg, older than patience, while the sky came up grey and then pewter and then almost white. The reservoir lay flat as a poured floor and gave back the glow of the campus on the hill until the daylight put it out. On the grade above the water there was a torn place in the brush that nobody had noticed yet, and a fence post snapped off white at the ground, and no skid marks, because the rain had seen to the rest.</p>
+
+    <p class="last-line"><span class="led led-dead" aria-hidden="true"></span><span>Forty feet down, in the dark under the dash of a drowned car, behind the little panel below the fuse box, set back gently into place by a man who hadn’t asked, the green light was long dark. It had held for a moment after the water took the car — its first job done — and set about its second, a quick uneven blinking, some last errand it had been built to run once the killing was finished. But the reservoir had come up over the dash inside the first minute, and the flooded board had shorted and failed with the errand a fraction run, hours before the heron ever came to the shallows. What it had started stayed unfinished, forty feet down in the cold dark, patient now itself. Waiting.</span></p>
+  </main>
+
+  <footer>
+    <div class="footer-note">End of Chapter Three</div>
+    <div class="nav-row">
+      <a href="chapter-2.html">&larr; Previous</a>
+      <span class="disabled">Next &rarr;</span>
+    </div>
+    <p class="byline">Dead Bolt &middot; a Harbor Glen mystery &middot; serialized on From the Study</p>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dead Bolt — Chapter One</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟢</text></svg>">
+<style>
+  :root {
+    color-scheme: dark;
+    --night: #10151b;
+    --night-lift: #151c24;
+    --paper: #c9c3b6;
+    --paper-dim: #8f8a7e;
+    --amber: #8a7a5c;
+    --hill: #a8b8cc;
+    --led: #2ee66b;
+    --led-halo: rgba(46, 230, 107, 0.45);
+  }
+
+  html { background: var(--night); }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(168, 184, 204, 0.05), transparent 60%),
+      var(--night);
+    color: var(--paper);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.75;
+    font-size: 1.075rem;
+  }
+
+  .page {
+    max-width: 36em;
+    margin: 0 auto;
+    padding: 0 1.4rem 5rem;
+  }
+
+  /* ---------- hero: the light before the title ---------- */
+  header {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.6rem;
+    padding: 3rem 0 2rem;
+  }
+
+  .led {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--led);
+    box-shadow:
+      0 0 6px 2px var(--led-halo),
+      0 0 24px 8px rgba(46, 230, 107, 0.18),
+      0 0 60px 22px rgba(46, 230, 107, 0.07);
+    animation: breathe 4.5s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+  }
+
+  .hero-led { animation: breathe 4.5s ease-in-out infinite, arrive 2.4s ease-out 1; }
+
+  @keyframes arrive {
+    0%   { opacity: 0; }
+    60%  { opacity: 0; }
+    100% { opacity: 0.85; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .led, .hero-led { animation: none; opacity: 1; }
+    .title-block { animation: none; opacity: 1; }
+  }
+
+  .title-block {
+    animation: settle 3.4s ease-out 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    align-items: center;
+  }
+
+  @keyframes settle {
+    0%   { opacity: 0; transform: translateY(6px); }
+    45%  { opacity: 0; }
+    100% { opacity: 1; transform: none; }
+  }
+
+  .eyebrow {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 9vw, 4.2rem);
+    font-weight: 400;
+    letter-spacing: 0.045em;
+    margin: 0;
+    color: var(--paper);
+    text-wrap: balance;
+  }
+
+  .chapter-no {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+
+  .hero-rule {
+    width: 3.2rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  }
+
+  .tagline {
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 0.95rem;
+    max-width: 26em;
+    text-wrap: balance;
+  }
+
+  /* ---------- body text ---------- */
+  main p {
+    margin: 0 0 1.45rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  main p:first-of-type { text-align: left; }
+
+  main p:first-of-type::first-letter {
+    font-size: 3.4em;
+    line-height: 0.82;
+    float: left;
+    padding: 0.06em 0.12em 0 0;
+    color: var(--amber);
+  }
+
+  em { color: var(--paper); }
+
+  /* the machine's voice — mono, boxed like a message that arrived */
+  .machine {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.86em;
+    line-height: 1.7;
+    color: var(--hill);
+    background: var(--night-lift);
+    border-left: 2px solid rgba(168, 184, 204, 0.35);
+    padding: 0.85rem 1.1rem;
+    margin: 0 0 1.45rem;
+    overflow-x: auto;
+  }
+
+  /* scene break: the light, small and patient */
+  .scene-break {
+    border: 0;
+    margin: 2.6rem auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .scene-break .led {
+    width: 7px;
+    height: 7px;
+    box-shadow:
+      0 0 5px 1px var(--led-halo),
+      0 0 16px 5px rgba(46, 230, 107, 0.12);
+  }
+
+  /* the closing line keeps its light */
+  .last-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .last-line .led {
+    flex: none;
+    position: relative;
+    top: -0.15em;
+  }
+
+  /* ---------- footer ---------- */
+  footer {
+    margin-top: 4.2rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid rgba(138, 122, 92, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-note {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+
+  .nav-row {
+    display: flex;
+    gap: 2.5rem;
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+  }
+
+  .nav-row a {
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(138, 122, 92, 0.4);
+    padding-bottom: 2px;
+  }
+
+  .nav-row a:hover, .nav-row a:focus-visible {
+    color: var(--paper);
+    border-bottom-color: var(--paper);
+    outline: none;
+  }
+
+  .nav-row .disabled {
+    color: var(--paper-dim);
+    opacity: 0.5;
+  }
+
+  .byline {
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="led hero-led" aria-hidden="true"></div>
+    <div class="title-block">
+      <div class="eyebrow">A Harbor Glen Mystery</div>
+      <h1>Dead Bolt</h1>
+      <div class="hero-rule" aria-hidden="true"></div>
+      <div class="chapter-no">Chapter One</div>
+      <p class="tagline">The machine didn&rsquo;t do it. Someone aimed it.</p>
+    </div>
+  </header>
+
+  <main>
+    <p>The box was smaller than Denny expected, and that bothered him more than if it had been the size of a toolbox.</p>
+
+    <p>Big would have meant something you&rsquo;d notice. Big, he could have talked himself out of. This was the size of a deck of cards, matte black, one small lamp sitting dark in its corner, and a short cable ending in a plug he recognized &mdash; the trapezoid kind, the one that went under every dashboard made in the last thirty years. He&rsquo;d seen a hundred of them. He&rsquo;d never once wondered what they were for.</p>
+
+    <p>He crouched in the dark between two rows of parked cars and waited for his hands to stop.</p>
+
+    <p>The lot belonged to the Lakeview &mdash; fourteen stories of pale stone and glass at the edge of Harbor Glen, two hundred and ten units, the tallest thing in town that wasn&rsquo;t up on the hill. Not a building Denny got past the lobby of in daylight. But the gate had rolled open to the code in the email like he belonged, and now he was inside the fence, among cars that were all newer than his, under cameras that sat on their poles in little black domes. He&rsquo;d counted four on the way in. Told himself it didn&rsquo;t matter &mdash; the man in the email had known the gate code, and a man who knew the gate code knew about the cameras too. The car was a Camry, a few years old, plain among the German metal around it, silver under the lot lights, nosed into the assigned space the email had named like it was reading off a lease. Up the hill behind the town the campus threw its glow into the low clouds, that clean white that never went off, and Denny found himself looking at it the way you look at a thing you&rsquo;re mad at without knowing why.</p>
+
+    <p>The instructions had come in three lines. No greeting.</p>
+
+    <div class="machine">Driver&rsquo;s side under the dash &mdash; pull the panel below the fuse box, the port is under it. Plug in until it clicks, tuck the box up over the harness so nothing hangs. Green light means done &mdash; you can leave.</div>
+
+    <p>He&rsquo;d read them maybe forty times. There was nothing in them about whose car it was, or what the box did, or why a man he&rsquo;d never met would put six hundred dollars in a wallet on his phone just to have a thing plugged into a Camry on Ferris Street at one in the morning.</p>
+
+    <p>Six hundred. Half up front, the message said, and the half had shown up exactly like it promised &mdash; a number climbing in the same no-name app as the other jobs, the junction box wired into a wall in the spring, the camera aimed down an alley in the fall, small stuff, harmless if there&rsquo;d been anyone to ask &mdash; no name attached to the money, no face, nobody to thank or blame. That was the part that should have stopped him. He knew that even then. A job with a person on the other end of it was a job. A job with nobody on the other end was something else, and he didn&rsquo;t have a word for the something else, so he&rsquo;d let the number talk him out of needing one.</p>
+
+    <p>The number, and the arithmetic. Nothing bad had come of the junction box. Nothing bad had come of the camera in the alley. Twice was a pattern if you needed it to be, and Denny needed it to be, so he ran the little sum everybody runs on their way into something &mdash; <em>it was fine before, it&rsquo;ll be fine now, this is no different</em> &mdash; and the sum came out the way it always comes out for a man who&rsquo;s already spent the money.</p>
+
+    <div class="scene-break" aria-hidden="true"><span class="led"></span></div>
+
+    <p>He tried the driver&rsquo;s door. Unlocked. People behind a gate like this stopped believing anyone could reach them &mdash; which was exactly what the hill was selling them, locks and gates and cameras that thought for themselves, and it was exactly wrong, and Denny was the proof.</p>
+
+    <p>The dome light came on and he killed it with a thumb on the switch, the way you do in your own car, and then he was folded down into the footwell with a penlight in his teeth, and it was easy, it was so easy, that was the thing nobody warned you about. The panel below the fuse box came off with two fingers, and there was the port, right where the three lines said it would be, waiting in the dark like it had been waiting since the factory. One push. The click he&rsquo;d been promised. Then he did the part that made it his trade and not just his crime: tucked the box up over a run of harness wire and seated it snug, so nothing hung down where a knee would brush it or an eye would snag, and a woman could drive a thousand miles over the top of it and never once know it was riding along.</p>
+
+    <p>The green light came on.</p>
+
+    <p>For a second nothing was different. The light just sat there, steady, a little animal eye in the dark under the wheel, and Denny stayed folded down there longer than he needed to, because some part of him had expected to <em>feel</em> it &mdash; a hum, a heat, some sign the thing had woken up and started doing whatever it did. There was nothing. A green light and the tick of the engine block cooling and the wind off the lake and his own breath.</p>
+
+    <p>He backed out of the car. Set the panel gently in place with the heel of his hand. Shut the door soft, the double-touch, latch it without the slam.</p>
+
+    <p>He stood in a stranger&rsquo;s parking space and understood that he could not now un-plug it. Not really. He could open the door and reach in and pull it, sure &mdash; but he&rsquo;d already done the thing, the money was already his, and there was no version of tonight where he hadn&rsquo;t crouched here. You couldn&rsquo;t un-know a parking lot.</p>
+
+    <p>Whose car. He hadn&rsquo;t asked. He made himself not ask now, walking back to his truck at the far dark end of the lot with his hands in his jacket and his shoulders up around his ears, because asking was for a job with a person on the other end of it, and this hadn&rsquo;t been that. He&rsquo;d figured the not-asking was the smart part. Later &mdash; much later, in a room with a man who fixed things for a living and a partner nobody could see &mdash; he&rsquo;d understand it was the whole trick. That the whole point of him, Denny Kowalczyk, forty-one, behind on the truck payment, good with his hands and nothing else, was that he was a pair of hands with the asking left out.</p>
+
+    <p>The thing in the dash didn&rsquo;t need him anymore. It had what it needed.</p>
+
+    <p>He drove home the back way, past the shuttered tire place and the new charging lot the company had put in for free, eight stalls glowing that same white as the hill, empty at this hour, waiting. He did not turn on the radio. At a stop sign that didn&rsquo;t need obeying he obeyed it anyway, a long five seconds, nobody coming from either direction, and he sat there under the light feeling watched by something he couldn&rsquo;t have pointed to.</p>
+
+    <p>Then the sign let him go, and he went.</p>
+
+    <p class="last-line"><span class="led" aria-hidden="true"></span><span>The green light stayed on all night, under the dash, patient as a spider.</span></p>
+  </main>
+
+  <footer>
+    <div class="footer-note">End of Chapter One</div>
+    <div class="nav-row">
+      <span class="disabled">&larr; Previous</span>
+      <a href="chapter-2.html">Chapter Two &rarr;</a>
+    </div>
+    <p class="byline">Dead Bolt &middot; a Harbor Glen mystery &middot; serialized on From the Study</p>
+  </footer>
+</div>
+
+</body>
+</html>

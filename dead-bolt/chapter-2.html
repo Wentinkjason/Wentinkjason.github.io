@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dead Bolt — Chapter Two</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟢</text></svg>">
+<style>
+  :root {
+    color-scheme: dark;
+    --night: #10151b;
+    --night-lift: #151c24;
+    --paper: #c9c3b6;
+    --paper-dim: #8f8a7e;
+    --amber: #8a7a5c;
+    --hill: #a8b8cc;
+    --led: #2ee66b;
+    --led-halo: rgba(46, 230, 107, 0.45);
+  }
+
+  html { background: var(--night); }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(168, 184, 204, 0.05), transparent 60%),
+      var(--night);
+    color: var(--paper);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.75;
+    font-size: 1.075rem;
+  }
+
+  .page {
+    max-width: 36em;
+    margin: 0 auto;
+    padding: 0 1.4rem 5rem;
+  }
+
+  header {
+    min-height: 78vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.6rem;
+    padding: 3rem 0 2rem;
+  }
+
+  .led {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--led);
+    box-shadow:
+      0 0 6px 2px var(--led-halo),
+      0 0 24px 8px rgba(46, 230, 107, 0.18),
+      0 0 60px 22px rgba(46, 230, 107, 0.07);
+    animation: breathe 4.5s ease-in-out infinite;
+  }
+
+  .led-dead {
+    background: #26312a;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.6), 0 0 0 1px rgba(46, 230, 107, 0.08);
+    animation: none;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+  }
+
+  .hero-led { animation: breathe 4.5s ease-in-out infinite, arrive 2.4s ease-out 1; }
+
+  @keyframes arrive {
+    0%   { opacity: 0; }
+    60%  { opacity: 0; }
+    100% { opacity: 0.85; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .led, .hero-led { animation: none; opacity: 1; }
+    .led-dead { opacity: 1; }
+    .title-block { animation: none; opacity: 1; }
+  }
+
+  .title-block {
+    animation: settle 3.4s ease-out 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    align-items: center;
+  }
+
+  @keyframes settle {
+    0%   { opacity: 0; transform: translateY(6px); }
+    45%  { opacity: 0; }
+    100% { opacity: 1; transform: none; }
+  }
+
+  .eyebrow {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 9vw, 4.2rem);
+    font-weight: 400;
+    letter-spacing: 0.045em;
+    margin: 0;
+    color: var(--paper);
+    text-wrap: balance;
+  }
+
+  .chapter-no {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+
+  .hero-rule {
+    width: 3.2rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  }
+
+  .tagline {
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 0.95rem;
+    max-width: 26em;
+    text-wrap: balance;
+  }
+
+  main p {
+    margin: 0 0 1.45rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  main p:first-of-type { text-align: left; }
+
+  main p:first-of-type::first-letter {
+    font-size: 3.4em;
+    line-height: 0.82;
+    float: left;
+    padding: 0.06em 0.12em 0 0;
+    color: var(--amber);
+  }
+
+  em { color: var(--paper); }
+
+  .machine {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.86em;
+    line-height: 1.7;
+    color: var(--hill);
+    background: var(--night-lift);
+    border-left: 2px solid rgba(168, 184, 204, 0.35);
+    padding: 0.85rem 1.1rem;
+    margin: 0 0 1.45rem;
+    overflow-x: auto;
+  }
+
+  .scene-break {
+    border: 0;
+    margin: 2.6rem auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .scene-break .led {
+    width: 7px;
+    height: 7px;
+    box-shadow:
+      0 0 5px 1px var(--led-halo),
+      0 0 16px 5px rgba(46, 230, 107, 0.12);
+  }
+
+  .last-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .last-line .led {
+    flex: none;
+    position: relative;
+    top: -0.15em;
+  }
+
+  footer {
+    margin-top: 4.2rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid rgba(138, 122, 92, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-note {
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+
+  .nav-row {
+    display: flex;
+    gap: 2.5rem;
+    font-family: Consolas, Menlo, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+  }
+
+  .nav-row a {
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(138, 122, 92, 0.4);
+    padding-bottom: 2px;
+  }
+
+  .nav-row a:hover, .nav-row a:focus-visible {
+    color: var(--paper);
+    border-bottom-color: var(--paper);
+    outline: none;
+  }
+
+  .nav-row .disabled {
+    color: var(--paper-dim);
+    opacity: 0.5;
+  }
+
+  .byline {
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="led hero-led" aria-hidden="true"></div>
+    <div class="title-block">
+      <div class="eyebrow">A Harbor Glen Mystery</div>
+      <h1>Dead Bolt</h1>
+      <div class="hero-rule" aria-hidden="true"></div>
+      <div class="chapter-no">Chapter Two</div>
+      <p class="tagline">The machine didn&rsquo;t do it. Someone aimed it.</p>
+    </div>
+  </header>
+
+  <main>
+    <p>The work order said SLOW DRAIN, KITCHEN, TWELVE-OH-FOUR — VANCE, NORA, and under that, in the notes field, someone in the office had typed <em>not urgent, resident flexible</em>. In Frank Dobbs’s experience that meant the resident was the kind of person who apologized for taking up your time — the kind who’d sit on a clog for a day rather than be a bother, so that by the time you got there the sink was full to the rim and you were bailing gray water into a bucket and tearing the trap apart, instead of clearing it in ten minutes the day it started. The polite ones always cost you more. He’d never once held it against them. On the upper floors of the Lakeview they were rare, and he’d learned to hold on to the ones he had.</p>
+
+    <p>He took the service elevator up because that was where a man with a bucket and a drain snake belonged, and because the mirrored guest elevator in the lobby made him look at himself, which he tried to do only when shaving. Fourteen floors. Two hundred and ten units. He’d been the maintenance supervisor here for six years, which meant he knew the building the way you know a body you’ve kept alive: where it ran cold, where the pressure dropped, which risers groaned in February. The tenants thought they lived in the Lakeview. Frank knew better. They lived in a machine, and he was the one who stood between them and its slow atrophy — the everyday, unhurried falling-apart of everything, which never takes a day off and never announces itself.</p>
+
+    <p>For the last two of those years, though, it hadn’t entirely been his machine. Dimension had come through with a renovation grant, generous, that was the word everyone kept using, and left behind a Lakeview that was safer than it had ever been and less his than it had ever been. New boilers he couldn’t argue with. Cameras that reported to a cloud instead of a closet. Locks and elevators and air handlers that all, somewhere he couldn’t see, asked a building up on the hill for permission before they did the smallest thing. He still kept it alive. He’d just stopped being the only one who held a key to it, and some nights that sat wrong with him in a way he couldn’t have written down.</p>
+
+    <p>He’d pulled the order for himself instead of handing it down the list — she was one of the ones you held on to, and the ones you held on to, you did yourself.</p>
+
+    <p>She opened the door before he knocked, which people almost never did, and she was dressed for somewhere better than a Tuesday morning, a soft grey blouse and no shoes, her hair still up from a shower. Late thirties, maybe forty. The kind of good-looking that didn’t ask you to notice it. Frank noticed it anyway, the way you notice good weather, and then he put it away where it belonged, which was nowhere, and lifted the bucket half an inch by way of hello.</p>
+
+    <p>“Mr. Dobbs. You didn’t have to come yourself. I know they’ve got you running the whole building.”</p>
+
+    <p>“Slow week,” he lied. It hadn’t been. “And it’s Frank.”</p>
+
+    <p>“Then it’s Nora, or I’ll feel eighty.” She stepped back to let him in. “It’s the kitchen. It’s been gurgling at me like it wants to say something.”</p>
+
+    <p>The unit was what money bought up here. Glass on two walls, the reservoir out one of them lying flat and grey under the clouds, and everywhere the small clean signs of the building’s other life: the panel by the door glowing its soft blue, the little black eye of a camera over the entry that the brochures called <em>peace of mind</em>, the smart lock that had cost the developer more than Frank’s first truck. He’d installed a hundred of those locks himself. He still didn’t trust them, and he’d never been able to say exactly why, except that a lock ought to be a thing a man could understand by taking it apart, and these you couldn’t. These you had to ask. Even his master access rotated now — a fresh code every morning that lived in the tablet and nowhere else, so that the first thing Frank Dobbs did each day, a man with two hundred and ten doors in his care, was ask a screen for permission to walk into his own boiler room.</p>
+
+    <p>He got down under the sink.</p>
+
+    <p>It was a good sink, a deep single basin, and the trap under it was fouled the way they always were, grease gone to candle wax, a slow throb of standing water above the clog. He laid a rag, set the bucket, and started backing off the slip nut with his fingers because you did the first quarter turn by hand to feel whether the threads were true. They were. Somebody had done this right the first time. Probably him.</p>
+
+    <p>“Can I get you anything?” she said from the counter. “Coffee? I make too much and then feel guilty pouring it out.”</p>
+
+    <p>“I’m alright.” Then, because she’d meant it and he could tell: “Water’d be good, actually. Thanks.”</p>
+
+    <p>She brought it in a real glass, not a plastic cup, and set it on the floor by his knee where he could reach it, and that small thing, the choosing of where to put it, stayed with him longer than it had any right to. Most of them handed you a bottle at the door and watched to make sure you left with it.</p>
+
+    <p>They talked while he worked, the easy nothing of two people in the same room. The weather that couldn’t decide. The heron that had started standing in the reservoir shallows at dawn, which she’d watched from the window and which Frank had also seen, from the loading dock, and for a minute they compared herons like it mattered.</p>
+
+    <p>There was one photograph in the whole place that looked like it had happened instead of being chosen. It sat on the shelf by the window in a plain frame among the designed things: a girl of nine or ten swallowed up in ear protection, standing beside a man in a scarred fire suit in the infield of a dirt track, both of them lit with the same grin. The car behind them was a bracket racer with its number painted on by hand.</p>
+
+    <p>“That’s my dad.” She’d followed his eye. “He ran the dirt ovals. Half my childhood smelled like race fuel and funnel cake.” She said it the way people say the good part of where they came from. “He’d sit me on his lap and let me steer the tow rig around the pits before I could see over the wheel.”</p>
+
+    <p>“He still run?”</p>
+
+    <p>“He passed. Six years now.” A beat, not a heavy one. “I take my own car out to the county track some Saturdays. Open lapping days, nothing anybody’d pay to watch. But it’s the one hour a week my hands know what to do without me telling them.” She looked out at the reservoir. “Dad used to say most people drive like they’re apologizing for it. Drove him up a wall.”</p>
+
+    <p>Frank, who had time for any person who was quietly good at a real thing, filed her under the ones who knew what a car was for, and went back to the trap.</p>
+
+    <p>He had the clog broken and the whole mess sliding into the bucket, thick and sweet-rotten, when her phone went.</p>
+
+    <p>She looked at it the way you look at a name you weren’t hoping for. “I have to take this. I’m sorry, I’ll just be —“ and she gestured at the far room and went, pulling the pocket door most of the way shut behind her.</p>
+
+    <p>Frank kept working. That was the job, and it was also manners. A man under a sink is halfway to invisible, and the decent thing to do with what you overhear is let it run through you like the water. He ran the snake down the branch line to be sure and listened to the pipe, not the woman.</p>
+
+    <p>But the walls up here were good, not perfect, and her voice came through in pieces when it rose.</p>
+
+    <p>“...told them in April, and my answer in July is the same answer...”</p>
+
+    <p>The snake found the last of it and cleared. Frank drew it back, coiling, wiping.</p>
+
+    <p>“...don’t care how they dress it up. I’ve read the soil study. I’m not signing off on something I know is —“ and then lower, a long stretch he couldn’t get, the shape of someone being reasonable at a person who was not. Then: “Because it’s my name on it. That’s why. It’s my name on the report and I’m the one who has to —“</p>
+
+    <p>A pause. When she spoke again the steel had gone out of it and left something wearier. “I know what they can do. I know exactly what they can do. Let them.”</p>
+
+    <p>Frank reseated the trap, hand-tight then a quarter with the wrench, and ran the tap and watched it drain fast and clean and honest, the water going down like water was supposed to. He wiped under the cabinet so she wouldn’t find a drop later and think he’d left a mess.</p>
+
+    <p>None of it was his. That was how he filed it, kneeling there. Tenant business, board business, the kind of trouble people up here paid to have. He’d heard worse through thinner walls and forgotten it by the elevator. A woman standing her ground on some committee, getting leaned on for it. Good for her, he thought, and meant it, and thought nothing else.</p>
+
+    <p>When she came back the shower-morning brightness had a crack in it, papered over fast. “All fixed?”</p>
+
+    <p>“All fixed. It’ll gurgle again in a couple years. They always come back to the same spot.” He gathered the bucket, the snake, the rag. “Run hot water down it a minute once a week. Costs you nothing and buys you time.”</p>
+
+    <p>“Run hot water once a week,” she repeated, like she was filing it, and smiled, and it was a real smile even with the crack behind it. “You know you’re the only person in this building who tells me how to prevent the next problem instead of just selling me the fix.”</p>
+
+    <p>“That’s the whole trade,” Frank said. “Anybody can fix a thing after. The work is keeping it from happening.”</p>
+
+    <p>He’d think about having said that. Later. For a long time.</p>
+
+    <p>“While you’ve got your boots on,” she said, “would you look at the thermostat? It’s been fighting me. I set it to seventy and it does whatever it wants. Last night it decided the middle of the night should be sixty-two.”</p>
+
+    <p>The thermostat was on the wall by the hall, a flat black tile of a thing with the Dimension logo etched small in the corner, the newest one, the one that was supposed to learn you. Frank stood in front of it and did what he could, which was less than he wanted. There was no cover to pop. There was no adjustment screw. There was a glass face that lit up when his hand got close and asked him, in soft grey letters, whether he’d like to <em>optimize</em>. He did not know what he would like to optimize. He pressed the places you’d press and it showed him graphs. It told him her comfort was learning. It did not let him set it to seventy and stay there, which was the one thing in the world she wanted it to do.</p>
+
+    <p>He pulled the tablet off his belt. The company issued one to every building it wired, a flat black slab that was supposed to let him run all two hundred and ten units from the palm of his hand and mostly made him feel like he was petitioning it for a favor. He thumbed to the unit’s climate panel and got a scrolling wall of options with names for things he hadn’t known had names. The setting he wanted was not on the screen he wanted it on. It was somewhere in there, behind something, under something. It always was.</p>
+
+    <p>“I’d have to fix it through this,” he said, and hated admitting it, tipping the tablet at her so she could see him not finding it. “And the tablet and I have a professional disagreement.” Thirty years of knowing exactly what to do with his hands, and a slab of glass had him standing there like a man who’d forgotten how doors worked. “Give me a day. I’ll figure out what it wants.”</p>
+
+    <p>“You make it sound like it has moods.”</p>
+
+    <p>“They all have moods now,” Frank said. “That’s the problem. Old one, you could argue with. This one you have to <em>ask</em>, and it doesn’t have to answer.”</p>
+
+    <p>At the door she thanked him again, by name, Frank not Mr. Dobbs, and he rode the service elevator down with the bucket between his boots and the reservoir sliding by grey in the little window at each floor, and he did not think about her, because there was a compressor down on three that had been cycling wrong and that was a real problem with a real answer, and Frank Dobbs was a man who went where the real problems were.</p>
+
+    <p>He was two floors down before it surfaced, the thing his eyes had passed over at the thermostat and his head had been worrying at ever since without telling him. The outlet. The one below the thermostat, its faceplate screw sitting nine-to-three. Frank had installed every outlet and switch in that unit himself, the year before she moved in, and he left his screw slots twelve-to-six, every last one, the way any tradesman worth the name leaves them — vertical, so the slot doesn’t shelve dust the way a sideways one will — a habit that was also a signature, and a signature nobody on earth would notice except the man who signed. Somebody had been inside that outlet. Recently. And there’d been no work order for it, because every work order in that building came across his desk, and he’d have remembered signing off on anyone so much as pulling a faceplate in twelve-oh-four.</p>
+
+    <p>He filed that too. Filed it wrong, the way you file a thing you’ll need and can’t yet read. Then the elevator opened on the lobby level and the day took him, and up in twelve-oh-four the blue panel glowed by the door and the little black eye kept its watch and the reservoir waited, flat and patient, for the rain that was still four clouds out.</p>
+
+    <div class="scene-break" aria-hidden="true"><span class="led"></span></div>
+
+    <p>He walked home, the way he did in anything short of sideways rain — eleven minutes across the tracks, and the walk was where the day drained off him. Home was an old two-bay garage on a corner lot, the ghost of its sign still readable in the brick, bought with his separation pay when he came out of the Corps and worth every dime since. The truck lived in the near bay: a ’63 Ford F100, dark forest green, whitewall tires, sixty-three years old and not a thing on it he couldn’t fix in an afternoon with the radio on. His tools lived on the walls around it, shadowboarded, every silhouette full. He laid a hand flat on the fender on his way to the stairs, the way you’d touch a horse’s neck walking past the stall. Everything else he kept alive belonged to somebody else. Everything in this building was his.</p>
+
+    <p>The apartment upstairs was two bedrooms, one of them Nell’s for the weeks he had her, and this was one of those weeks, which made the place better than it was. From the kitchen window you could see the Lakeview’s top floors over the roofline, lit up smart and cloud-connected, every amenity the hill could think of. Frank’s building had a coffee maker with one switch, a landline he kept for reasons he wouldn’t be argued out of, and not one thing in it that asked permission from anybody. He’d kept it that way for years before he could have told you why. When Nell wasn’t in it, everything stayed where he’d put it, and he’d learned that a home where nothing ever moved was just a tidy word for empty.</p>
+
+    <p>She was on the couch with her laptop balanced on her knees and her socked feet up on the coffee table he’d built, fifteen years old and most of the way to somebody. “Hey, Dad.” She said it without looking up, which from a teenager was practically a hug.</p>
+
+    <p>He set his lunch cooler down and stood in his own kitchen thinking about a thermostat.</p>
+
+    <p>The tablet sat on the counter where he’d set it down, dark and smug. It gnawed at him through supper, through the dishes, the way an unfinished job did. He’d gone back into the thing twice and gotten lost twice, in menus that folded into menus, every screen sure he wanted something other than what he wanted. There was a thing on a woman’s wall that would not do the one plain thing she asked of it, and the only door to fixing it was a slab he couldn’t read, and he was the man they called when things wouldn’t behave.</p>
+
+    <p>“You’re doing the face,” Nell said.</p>
+
+    <p>“What face.”</p>
+
+    <p>“The one where a machine hurt your feelings.” She still hadn’t looked up. “It’s the work tablet, isn’t it. You’ve been glaring at it since you walked in.”</p>
+
+    <p>He didn’t ask how she knew. She always knew. “There’s a thermostat that won’t hold a setpoint. The fix is somewhere in this” — he lifted the tablet an inch and let it drop — “and this and I aren’t speaking.”</p>
+
+    <p>“So ask it.”</p>
+
+    <p>“I did ask it. It offered to optimize me.”</p>
+
+    <p>“Not the tablet, Dad.” Now she looked up, with the particular patience of a child explaining the world to a parent. “The assistant. Just tell it what you’re trying to do and let it find the menu.” She was already dragging the laptop up onto her knees, fingers going, the way she’d reach for a jar he couldn’t open.</p>
+
+    <p>“This is the new one, by the way,” she said, with a reverence he’d never once heard her spend on a person. “Dimension’s flagship. It’s called Halo. Dropped last month. Million-token context window—“</p>
+
+    <p>“A what.”</p>
+
+    <p>“—which just means you could talk to it all day and all night and it wouldn’t lose a word. While you’ve got it open it holds everything, the whole conversation, no matter how big it gets. And you can show it things — pictures, files, whatever — and it reads them the way you’d read a page. It’s genuinely the best model money can get.” She said it fast and bright, the way she’d once listed the features of a pony she wasn’t getting. “Mom works on the serious ones. The ones they don’t let people play with. This is just the good one you can actually have.”</p>
+
+    <p>Something in Frank set its heels. He couldn’t have told you all of what it was. Some of it was pride, a man not wanting a machine to do his job in front of his kid. Some of it was older and worse, the whole grinding fact that the thing she was reaching for was the thing her mother did for a living now, in a glass building on a hill, with a man who was not Frank, and that his daughter spoke its language like a native of a country he needed a visa to visit. Asking it felt like signing something.</p>
+
+    <p>“I’ll figure it out myself.”</p>
+
+    <p>“You’ll figure it out in like three days.” She wasn’t wrong, and the not-wrongness of it was the whole thing. “It’ll take ten seconds and you can go back to hating it. Come on. What’s the model.”</p>
+
+    <p>He told her the model of the tablet and what he was after, because she was his kid and it was her week and the thing really had beaten him. She typed fast, not even looking, and turned the laptop so he could see the answer come up.</p>
+
+    <div class="machine">On that facilities tablet the unit-level climate controls hide under the building map, not the device list — tap the unit, then <strong>Advanced</strong>, then turn off <strong>Adaptive Comfort</strong> and <strong>Auto-Schedule</strong> and set a <strong>Permanent Hold</strong> at the temperature you want. Those two toggles are the whole problem; they override anything a resident sets, and they’re buried a layer past where anyone thinks to look. Turn them off and it’ll hold wherever you put it.</div>
+
+    <p>Frank read it twice. It was, he had to allow, a good answer. Better than the company’s own page, better than the tablet’s own help, which mostly wanted to sell him a training seminar. It named the problem, named where the fool company had buried the fix, and even threw in a small human courtesy — <em>they’re buried past where anyone thinks to look</em> — as if it were on his side about it. A layer past the map, under <em>Advanced</em>, where no honest person would look. He could have taken that thermostat off the wall and read every trace on its board and never found those two words, because they weren’t in the wall. They were in the asking.</p>
+
+    <p>“Huh,” he said.</p>
+
+    <p>“You’re welcome,” said Nell.</p>
+
+    <p>“I didn’t say thank you.”</p>
+
+    <p>“You said <em>huh</em>. From you that’s a parade.” She was already turning back to whatever had had her before. Then, not looking up, easy as breathing: “That’s just it talking, by the way. If you let it, it can actually get into stuff. Files, drives, whatever you plug in.” A shrug. “Mom’s whole job is making sure it doesn’t.”</p>
+
+    <p>She said it the way she said everything from that world, native, a door she walked through without noticing it was a door. Frank noticed. He noticed it the way you notice a draft from a room you hadn’t known was open. He filed it with the outlet and the thermostat, a day that would not stop handing him things he couldn’t quite read, and went to find her something to eat.</p>
+
+    <p>He stood in his small correct kitchen, not trusting the thing and using it anyway, which was, though he didn’t have the word for it yet, the exact shape of everything that was coming.</p>
+  </main>
+
+  <footer>
+    <div class="footer-note">End of Chapter Two</div>
+    <div class="nav-row">
+      <a href="chapter-1.html">&larr; Previous</a>
+      <a href="chapter-3.html">Chapter Three &rarr;</a>
+    </div>
+    <p class="byline">Dead Bolt &middot; a Harbor Glen mystery &middot; serialized on From the Study</p>
+  </footer>
+</div>
+
+</body>
+</html>
