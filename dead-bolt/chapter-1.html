@@ -3,6 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A man plugs a small black box into a stranger's Camry at one in the morning. Green light means done. A Harbor Glen mystery begins.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Study">
+<meta property="og:title" content="Dead Bolt — Chapter One">
+<meta property="og:description" content="A man plugs a small black box into a stranger's Camry at one in the morning. Green light means done. A Harbor Glen mystery begins.">
+<meta name="twitter:card" content="summary">
 <title>Dead Bolt — Chapter One</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟢</text></svg>">
 <style>
@@ -12,7 +18,7 @@
     --night-lift: #151c24;
     --paper: #c9c3b6;
     --paper-dim: #8f8a7e;
-    --amber: #8a7a5c;
+    --amber: #9a8a6a;
     --hill: #a8b8cc;
     --led: #2ee66b;
     --led-halo: rgba(46, 230, 107, 0.45);
@@ -135,15 +141,14 @@
   /* ---------- body text ---------- */
   main p {
     margin: 0 0 1.45rem;
-    text-align: justify;
     hyphens: auto;
   }
 
   main p:first-of-type { text-align: left; }
 
   main p:first-of-type::first-letter {
-    font-size: 3.4em;
-    line-height: 0.82;
+    font-size: 2.9em;
+    line-height: 0.85;
     float: left;
     padding: 0.06em 0.12em 0 0;
     color: var(--amber);
@@ -162,6 +167,7 @@
     padding: 0.85rem 1.1rem;
     margin: 0 0 1.45rem;
     overflow-x: auto;
+    overflow-wrap: anywhere;
   }
 
   /* scene break: the light, small and patient */
@@ -228,10 +234,14 @@
     padding-bottom: 2px;
   }
 
-  .nav-row a:hover, .nav-row a:focus-visible {
+  .nav-row a:hover {
     color: var(--paper);
     border-bottom-color: var(--paper);
-    outline: none;
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--led);
+    outline-offset: 3px;
   }
 
   .nav-row .disabled {
